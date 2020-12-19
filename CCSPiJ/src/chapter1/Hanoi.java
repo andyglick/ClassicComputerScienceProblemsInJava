@@ -19,14 +19,14 @@ package chapter1;
 import java.util.Stack;
 
 public class Hanoi {
-	private final int NUM_DISCS;
+	private final int numDiscs;
 	public final Stack<Integer> towerA = new Stack<>();
 	public final Stack<Integer> towerB = new Stack<>();
 	public final Stack<Integer> towerC = new Stack<>();
 
-	public Hanoi(int numDiscs) {
-		NUM_DISCS = numDiscs;
-		for (int i = 1; i <= numDiscs; i++) {
+	public Hanoi(int discs) {
+		numDiscs = discs;
+		for (int i = 1; i <= discs; i++) {
 			towerA.push(i);
 		}
 	}
@@ -42,7 +42,7 @@ public class Hanoi {
 	}
 
 	public void solve() {
-		move(towerA, towerC, towerB, NUM_DISCS);
+		move(towerA, towerC, towerB, numDiscs);
 	}
 
 	public static void main(String[] args) {

@@ -27,6 +27,8 @@ import java.util.zip.GZIPOutputStream;
 
 public class ListCompression extends Chromosome<ListCompression> {
 
+	private static final List<String> ORIGINAL_LIST = List.of("Michael", "Sarah", "Joshua", "Narine",
+			"David", "Sajid", "Melanie", "Daniel", "Wei", "Dean", "Brian", "Murat", "Lisa");
 	private List<String> myList;
 	private Random random;
 
@@ -36,8 +38,7 @@ public class ListCompression extends Chromosome<ListCompression> {
 	}
 
 	public static ListCompression randomInstance() {
-		ArrayList<String> tempList = new ArrayList<>(List.of("Michael", "Sarah", "Joshua", "Narine", "David", "Sajid",
-				"Melanie", "Daniel", "Wei", "Dean", "Brian", "Murat", "Lisa"));
+		ArrayList<String> tempList = new ArrayList<>(ORIGINAL_LIST);
 		Collections.shuffle(tempList);
 		return new ListCompression(tempList);
 	}
@@ -96,19 +97,19 @@ public class ListCompression extends Chromosome<ListCompression> {
 	}
 
 	public static void main(String[] args) {
-		ListCompression originalOrder = new ListCompression(
-				List.of("Michael", "Sarah", "Joshua", "Narine", "David", "Sajid",
-						"Melanie", "Daniel", "Wei", "Dean", "Brian", "Murat", "Lisa"));
+		ListCompression originalOrder = new ListCompression(ORIGINAL_LIST);
 		System.out.println(originalOrder);
 		ArrayList<ListCompression> initialPopulation = new ArrayList<>();
 		final int POPULATION_SIZE = 100;
+		final int GENERATIONS = 100;
+		final double THRESHOLD = 1.0;
 		for (int i = 0; i < POPULATION_SIZE; i++) {
 			initialPopulation.add(ListCompression.randomInstance());
 		}
 		GeneticAlgorithm<ListCompression> ga = new GeneticAlgorithm<>(
 				initialPopulation,
 				0.2, 0.7, GeneticAlgorithm.SelectionType.TOURNAMENT);
-		ListCompression result = ga.run(100, 1.0);
+		ListCompression result = ga.run(GENERATIONS, THRESHOLD);
 		System.out.println(result);
 	}
 }

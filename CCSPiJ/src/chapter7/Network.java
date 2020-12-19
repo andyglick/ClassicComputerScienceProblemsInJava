@@ -23,14 +23,13 @@ import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 
 public class Network<T> {
-	private List<Layer> layers;
+	private List<Layer> layers = new ArrayList<>();
 
 	public Network(int[] layerStructure, double learningRate,
 			DoubleUnaryOperator activationFunction, DoubleUnaryOperator derivativeActivationFunction) {
 		if (layerStructure.length < 3) {
 			throw new IllegalArgumentException("Error: Should be at least 3 layers (1 input, 1 hidden, 1 output).");
 		}
-		layers = new ArrayList<>();
 		// input layer
 		Layer inputLayer = new Layer(Optional.empty(), layerStructure[0], learningRate, activationFunction,
 				derivativeActivationFunction);
@@ -52,6 +51,7 @@ public class Network<T> {
 			result = layer.outputs(result);
 		}
 		return result;
+
 	}
 
 	// Figure out each neuron's changes based on the errors of the output

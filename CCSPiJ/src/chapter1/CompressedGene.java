@@ -34,7 +34,8 @@ public class CompressedGene {
 		final String upperGene = gene.toUpperCase();
 		// convert String to bit representation
 		for (int i = 0; i < length; i++) {
-			final int firstLocation = 2 * i, secondLocation = 2 * i + 1;
+			final int firstLocation = 2 * i;
+			final int secondLocation = 2 * i + 1;
 			switch (upperGene.charAt(i)) {
 			case 'A': // 00 are next two bits
 				bitSet.set(firstLocation, false);
@@ -63,7 +64,7 @@ public class CompressedGene {
 			return "";
 		}
 		// create a mutable place for characters with right capacity
-		StringBuilder builder = new StringBuilder(length / 2);
+		StringBuilder builder = new StringBuilder(length);
 		for (int i = 0; i < (length * 2); i += 2) {
 			final int firstBit = (bitSet.get(i) ? 1 : 0);
 			final int secondBit = (bitSet.get(i + 1) ? 1 : 0);
